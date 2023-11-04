@@ -10,14 +10,12 @@ log_file = os.getenv('LOG_FILE')
 # Initialize the current line number as a global variable
 current_line_number = 0
 
-# Read the code file (change the path to your file)
-with open(log_file, 'r') as file:
-    code_lines = file.readlines()
-    max_code_lines = len(code_lines)
-
 @app.route('/')
 def display_code():
     global current_line_number
+    # Read the code file (change the path to your file)
+    with open(log_file, 'r') as file:
+        code_lines = file.readlines()
 
     # Determine the range of lines to display (100 lines at a time)
     if current_line_number > 0:
@@ -31,6 +29,9 @@ def display_code():
 @app.route('/next')
 def next_lines():
     global current_line_number
+    with open(log_file, 'r') as file:
+        code_lines = file.readlines()
+        max_code_lines = len(code_lines)
     current_line_number += 100
     if current_line_number >= max_code_lines:
        message = "the end of file, see the last 100 strings"
@@ -48,7 +49,9 @@ def previous_lines():
 @app.route('/end')
 def to_the_end():
     global current_line_number
-    global max_code_lines
+    with open(log_file, 'r') as file:
+        code_lines = file.readlines()
+        max_code_lines = len(code_lines)
     current_line_number = max_code_lines - 100
     return display_code()
 
