@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+    <style>
+        #code {
+            white-space: pre;
+        }
+        .btn {
+          @apply font-bold py-2 px-4 rounded;
+        }
+        .btn-blue {
+          @apply bg-blue-500 text-white;
+        }
+        .btn-blue:hover {
+          @apply bg-blue-700;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="/previous" class="btn btn-blue">Previous</a>
+    <a href="/next" class="btn btn-blue">Next</a>
+
+    <pre><code id="code">{{ code | safe }}</code></pre>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+</body>
+</html>
