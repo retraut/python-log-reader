@@ -16,12 +16,31 @@
         .btn-blue:hover {
           @apply bg-blue-700;
         }
+
+        .pure_css_button {
+          display: inline-block;
+          width: 165px;
+          text-align: center;
+          color: #fff;
+          text-decoration: none;
+          background: linear-gradient(180deg, #4b3529 21%, #4c2e1a 100%);
+          border-radius: 5px;
+          border: 1px solid #ffffff;
+          font-family: Arial;
+          font-weight: normal;
+          border-left: 2px solid #e5ccaf;
+          border-image: linear-gradient(to bottom, #ffd400, rgba(0, 0, 0, 0)) 0 100%;
+          border-top: 1px solid #ffd400;
+        }
+
     </style>
 </head>
 <body>
 
-    <a href="/previous" class="btn btn-blue">Previous</a>
-    <a href="/next" class="btn btn-blue">Next</a>
+    <a href="/previous" class="pure_css_button">Previous</a>
+    <a href="/next" class="pure_css_button">Next</a>
+    <a href="/end" class="pure_css_button">End of file</a>
+    we are on the line: {{ current_line_number }}
 
     <pre><code id="code">{{ code | safe }}</code></pre>
 
