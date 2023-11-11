@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu Mono:regular,bold&subset=Latin">
+
     <style>
         #code {
-            white-space: pre;
+          white-space: pre;
+          font-family: Ubuntu Mono;
         }
         .btn {
           @apply font-bold py-2 px-4 rounded;
@@ -19,14 +22,14 @@
 
         .pure_css_button {
           display: inline-block;
-          width: 165px;
+          width: 100px;
           text-align: center;
           color: #fff;
           text-decoration: none;
           background: linear-gradient(180deg, #4b3529 21%, #4c2e1a 100%);
           border-radius: 5px;
           border: 1px solid #ffffff;
-          font-family: Arial;
+          font-family: Ubuntu Mono;
           font-weight: normal;
           border-left: 2px solid #e5ccaf;
           border-image: linear-gradient(to bottom, #ffd400, rgba(0, 0, 0, 0)) 0 100%;
@@ -40,13 +43,15 @@
     <a href="/previous" class="pure_css_button">Previous</a>
     <a href="/next" class="pure_css_button">Next</a>
     <a href="/end" class="pure_css_button">End of file</a>
-    we are on the line: {{ current_line_number }}
+    page: {{ current_page_number }}
 
     <pre><code id="code">{{ code | safe }}</code></pre>
 
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             document.querySelectorAll('pre code').forEach((block) => {
+                hljs.initHighlightingOnLoad();
+                hljs.lineNumbersBlock(block);
                 hljs.highlightBlock(block);
             });
         });
