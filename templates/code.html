@@ -37,12 +37,44 @@
         }
 
     </style>
+    <script>
+        function lastePage() {
+            window.location.href = `/end`;
+        }
+        function checkValidPage(pageNumber) {
+            fetch(`/check_valid_page/${pageNumber}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.valid_page) {
+                        alert('Invalid page number. Redirecting to the last page.');
+                        window.location.href = `/page/${data.max_pages}`;
+                    } else {
+                        window.location.href = `/next`;
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function checkValidPreviousPage() {
+            fetch('/check_valid_page/{{ current_page_number - 1 }}')
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.valid_page) {
+                        alert('Invalid page number. Redirecting to the first page.');
+                        window.location.href = '/page/1';
+                    } else {
+                        window.location.href = '/previous';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
 </head>
 <body>
 
-    <a href="/previous" class="pure_css_button">Previous</a>
-    <a href="/next" class="pure_css_button">Next</a>
-    <a href="/end" class="pure_css_button">End of file</a>
+    <button onclick="checkValidPreviousPage()">Previous</button>
+    <button onclick="checkValidPage({{ current_page_number + 1 }})">Next</button>
+    <button onclick="lastePage()">Last Page</button>
     page: {{ current_page_number }}
 
     <pre><code id="code">{{ code | safe }}</code></pre>
