@@ -77,7 +77,7 @@
     <button onclick="lastePage()">Last Page</button>
     page: {{ current_page_number }}
 
-    <pre><code id="code">{{ code | safe }}</code></pre>
+    <pre><code class='log' id="code">{{ code | safe }}</code></pre>
 
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
