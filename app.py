@@ -39,13 +39,15 @@ def display_code(page_number=1):
 def next_lines():
     global current_page_number
     max_pages = get_max_pages()
-    current_page_number = min(current_page_number + 1, max_pages)
+    if current_page_number < max_pages:  # Check if the next page is valid
+        current_page_number += 1
     return redirect(url_for('display_code', page_number=current_page_number))
 
 @app.route('/previous')
 def previous_lines():
     global current_page_number
-    current_page_number = max(1, current_page_number - 1)
+    if current_page_number > 1:  # Check if the previous page is valid
+        current_page_number -= 1
     return redirect(url_for('display_code', page_number=current_page_number))
 
 @app.route('/end')
